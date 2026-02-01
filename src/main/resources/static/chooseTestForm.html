@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор теста | DigitalCulture.test</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/chooseTestForm.css">
+
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="choose-test-container">
+    <!-- Шапка -->
+    <header class="test-header">
+        <div class="header-content">
+            <a href="/dashboard" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Назад в панель управления
+            </a>
+            <div class="header-info">
+                <h1>
+                    <i class="fas fa-clipboard-list"></i>
+                    Доступные тесты
+                </h1>
+                <p class="header-subtitle">Выберите тест для прохождения</p>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main class="test-main-content">
+            <div class="sidebar-card">
+                <h3>
+                    <i class="fas fa-chart-line"></i>
+                    Статистика
+                </h3>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Всего тестов:</span>
+                        <span class="stat-value" id="totalTests">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Доступно:</span>
+                        <span class="stat-value" id="availableTests">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Завершено:</span>
+                        <span class="stat-value" id="completedTests">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">В процессе:</span>
+                        <span class="stat-value" id="inProgressTests">0</span>
+                    </div>
+                </div>
+            </div>
+
+
+        <!-- Основная область с тестами -->
+        <section class="tests-content">
+            <div class="content-header">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input
+                            type="text"
+                            id="testSearch"
+                            placeholder="Поиск тестов по названию или описанию..."
+                            autocomplete="off"
+                    >
+                </div>
+
+
+            </div>
+
+            <!-- Контейнер для тестов -->
+            <div class="tests-container" id="testsContainer">
+                <!-- Тесты будут загружаться динамически -->
+                <div class="loading-state" id="loadingState">
+                    <div class="spinner"></div>
+                    <p>Загрузка тестов...</p>
+                </div>
+
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <i class="fas fa-clipboard-question"></i>
+                    <h3>Тесты не найдены</h3>
+                    <p>Нет доступных тестов для прохождения</p>
+                </div>
+
+                <div class="no-results-state" id="noResultsState" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h3>Ничего не найдено</h3>
+                    <p>Попробуйте изменить параметры поиска или фильтры</p>
+                </div>
+            </div>
+
+            <!-- Пагинация -->
+            <div class="pagination" id="pagination" style="display: none;">
+                <button class="btn btn-outline" id="prevPage">
+                    <i class="fas fa-chevron-left"></i>
+                    Назад
+                </button>
+                <div class="page-numbers" id="pageNumbers"></div>
+                <button class="btn btn-outline" id="nextPage">
+                    Вперед
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="test-footer">
+        <p>© 2026 DigitalCulture.test | Система тестирования цифровых компетенций</p>
+
+    </footer>
+</div>
+
+<!-- Модальное окно подтверждения -->
+<div class="modal" id="confirmModal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>
+                <i class="fas fa-play-circle"></i>
+                Начать тест
+            </h3>
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="test-info-preview" id="testPreview">
+                <!-- Информация о тесте будет заполняться динамически -->
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-outline" id="modalCancel">
+                    Отмена
+                </button>
+                <button class="btn btn-primary" id="modalConfirm">
+                    <i class="fas fa-play"></i>
+                    Начать тест
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script src="js/chooseTestForm.js"></script>
+</body>
+</html>

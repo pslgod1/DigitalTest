@@ -1,0 +1,544 @@
+/* adminCreateTest.css - Стили для создания теста */
+
+/* Наследуем основные стили из админ-панели */
+.create-test-page {
+    background-color: #f5f7fa;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Прогресс создания теста */
+.create-test-progress {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.progress-text {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+}
+
+.progress-value {
+    font-weight: 600;
+    color: var(--admin-primary);
+    font-family: 'JetBrains Mono', monospace;
+    min-width: 40px;
+}
+
+.progress-bar {
+    width: 150px;
+    height: 8px;
+    background-color: var(--admin-border);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--admin-primary);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* Основное содержимое */
+.create-test-content {
+    flex: 1;
+    padding: 30px;
+    background-color: #f5f7fa;
+    overflow-y: auto;
+}
+
+.create-test-form {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Секции формы */
+.form-section {
+    margin-bottom: 40px;
+}
+
+.form-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.section-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title i {
+    color: var(--admin-primary);
+}
+
+.questions-counter {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-gray);
+    margin-left: 10px;
+}
+
+/* Карточки формы */
+.form-card {
+    background-color: var(--admin-card-bg);
+    border-radius: var(--border-radius-lg);
+    padding: 30px;
+    box-shadow: var(--admin-card-shadow);
+    border: 1px solid var(--admin-border);
+}
+
+/* Группы форм */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.required {
+    color: var(--admin-danger);
+    font-weight: 600;
+}
+
+.form-input {
+    width: 100%;
+    padding: 14px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    border: 2px solid var(--admin-border);
+    border-radius: var(--border-radius-sm);
+    background: white;
+    color: var(--text-dark);
+    transition: all 0.2s ease;
+}
+
+.form-input:focus {
+    border-color: var(--admin-primary);
+    box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.1);
+    outline: none;
+}
+
+.form-textarea {
+    width: 100%;
+    padding: 14px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    border: 2px solid var(--admin-border);
+    border-radius: var(--border-radius-sm);
+    background: white;
+    color: var(--text-dark);
+    transition: all 0.2s ease;
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.5;
+}
+
+.form-textarea:focus {
+    border-color: var(--admin-primary);
+    box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.1);
+    outline: none;
+}
+
+.form-hint {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 8px;
+}
+
+.form-select {
+    width: 100%;
+    padding: 14px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    border: 2px solid var(--admin-border);
+    border-radius: var(--border-radius-sm);
+    background: white;
+    color: var(--text-dark);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+    padding-right: 44px;
+}
+
+.form-select:focus {
+    border-color: var(--admin-primary);
+    box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.1);
+    outline: none;
+}
+
+/* Строка с двумя полями */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+/* Карточка вопроса */
+.question-card {
+    background-color: var(--admin-card-bg);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--admin-card-shadow);
+    border: 1px solid var(--admin-border);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.question-card:last-child {
+    margin-bottom: 0;
+}
+
+.question-card:hover {
+    border-color: var(--admin-primary-light);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.question-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.question-number {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.question-category-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.question-category-badge[data-category="thinking"] {
+    background-color: rgba(26, 115, 232, 0.1);
+    color: #1a73e8;
+    border: 1px solid rgba(26, 115, 232, 0.2);
+}
+
+.question-category-badge[data-category="affiliation"] {
+    background-color: rgba(234, 67, 53, 0.1);
+    color: #ea4335;
+    border: 1px solid rgba(234, 67, 53, 0.2);
+}
+
+.question-category-badge[data-category="flexibility"] {
+    background-color: rgba(52, 168, 83, 0.1);
+    color: #34a853;
+    border: 1px solid rgba(52, 168, 83, 0.2);
+}
+
+.question-category-badge[data-category="experience"] {
+    background-color: rgba(142, 68, 173, 0.1);
+    color: #8e44ad;
+    border: 1px solid rgba(142, 68, 173, 0.2);
+}
+
+.question-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-gray);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-icon:hover {
+    background-color: #f5f5f5;
+    color: var(--admin-primary);
+}
+
+.delete-question-btn:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--admin-danger);
+}
+
+/* Тело вопроса */
+.question-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Секция ответов */
+.answers-section {
+    margin-top: 10px;
+}
+
+.answers-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.answers-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.answer-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.answer-input-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.answer-radio {
+    flex-shrink: 0;
+}
+
+.correct-answer-radio {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.answer-text {
+    flex: 1;
+}
+
+.delete-answer-btn {
+    flex-shrink: 0;
+}
+
+.delete-answer-btn:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--admin-danger);
+}
+
+.add-answer-btn {
+    margin-top: 10px;
+}
+
+/* Состояние пустых вопросов */
+.empty-questions-message {
+    background-color: var(--admin-card-bg);
+    border-radius: var(--border-radius-lg);
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow: var(--admin-card-shadow);
+    border: 2px dashed var(--admin-border);
+}
+
+.empty-state {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: var(--admin-border);
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: var(--text-gray);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Кнопки действий формы */
+.actions-section {
+    margin-top: 40px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.primary-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    color: white;
+}
+
+/* Сообщения формы */
+.form-warning, .form-success, .form-error {
+    padding: 16px 20px;
+    border-radius: var(--border-radius-sm);
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+}
+
+.form-warning {
+    background-color: rgba(243, 156, 18, 0.1);
+    color: var(--admin-warning);
+    border: 1px solid rgba(243, 156, 18, 0.2);
+}
+
+.form-success {
+    background-color: rgba(39, 174, 96, 0.1);
+    color: var(--admin-success);
+    border: 1px solid rgba(39, 174, 96, 0.2);
+}
+
+.form-error {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--admin-danger);
+    border: 1px solid rgba(231, 76, 60, 0.2);
+}
+
+.form-warning i, .form-success i, .form-error i {
+    font-size: 1.2rem;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .create-test-content {
+        padding: 20px;
+    }
+
+    .form-card, .question-card {
+        padding: 20px;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .question-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .question-actions {
+        align-self: flex-end;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .primary-actions {
+        flex-direction: column;
+    }
+
+    .btn, .btn-secondary, .btn-primary {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .create-test-progress {
+        display: none;
+    }
+
+    .question-title {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .answer-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .delete-answer-btn {
+        align-self: flex-end;
+    }
+}

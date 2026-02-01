@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет | DigitalCulture.test</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/mainForm.css">
+    <link rel="stylesheet" href="css/dashBoard.css">
+
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+<!-- Контейнер для всего кабинета -->
+<div class="dashboard-container">
+    <!-- Боковая панель -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="user-avatar">
+                <img id="userAvatar"
+                     src="https://ui-avatars.com/api/?background=0077FF&color=fff&size=80"
+                     alt="Аватар" class="avatar-img">
+            </div>
+            <div class="user-info">
+                <h3 class="user-name" id="userName">Загрузка...</h3>
+                <p class="user-email" id="userEmail">Загрузка...</p>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="nav-menu">
+                <li class="nav-item active">
+                    <a href="/dashboard" class="nav-link">
+                        <i class="fas fa-home nav-icon"></i>
+                        <span class="nav-text">Главная</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/chooseTest" class="nav-link">
+                        <i class="fas fa-clipboard-list nav-icon"></i>
+                        <span class="nav-text">Выбрать тест</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/history" class="nav-link">
+                        <i class="fas fa-history nav-icon"></i>
+                        <span class="nav-text">История тестов</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-logout" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Выйти</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Основной контент -->
+    <main class="main-content">
+        <!-- Верхняя панель -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Главная</h1>
+            </div>
+            <div class="topbar-right">
+                <div class="current-date" id="currentDate">
+                    <!-- Дата будет заполнена через JS -->
+                </div>
+            </div>
+        </header>
+
+        <!-- Содержимое страницы -->
+        <div class="page-content">
+            <!-- Приветствие -->
+            <section class="welcome-section">
+                <h2 class="welcome-title">Добро пожаловать, <span class="user-name-highlight" id="welcomeName">Загрузка...</span>!</h2>
+                <p class="welcome-subtitle">Ваш прогресс в развитии цифровой культуры</p>
+            </section>
+
+            <!-- Статистика в карточках -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="totalTests">0</h3>
+                            <p class="stat-label">Всего пройдено тестов</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #34a853 0%, #0d9d58 100%);">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="averageScore">0<span class="percent">%</span></h3>
+                            <p class="stat-label">Средний балл</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-level" id="currentLevel">Новичок</h3>
+                            <p class="stat-label">Текущий уровень</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Быстрые действия -->
+            <section class="actions-section">
+                <h3 class="section-title">Быстрые действия</h3>
+                <div class="actions-grid">
+                    <a href="/chooseTest" class="action-card primary-action">
+                        <div class="action-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <div class="action-content">
+                            <h4>Пройти тест</h4>
+                            <p>Новое тестирование по всем компонентам цифровой культуры</p>
+                        </div>
+                        <div class="action-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+
+                    <a href="/history" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div class="action-content">
+                            <h4>История тестов</h4>
+                            <p>Посмотреть все пройденные тесты и результаты</p>
+                        </div>
+                        <div class="action-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+
+
+            <!-- Последний результат -->
+            <section class="last-result-section">
+                <div class="section-header">
+                    <h3 class="section-title">Последний результат теста</h3>
+                    <a href="/history" class="view-all-link">Смотреть всю историю →</a>
+                </div>
+
+                <div class="result-card" id="lastResultCard" style="display: none;">
+                    <div class="result-header">
+                        <div class="result-info">
+                            <h4 id="lastTestTitle">Тест: Загрузка...</h4>
+                            <p class="result-date"><i class="far fa-calendar"></i> <span id="lastTestDate">Дата загрузки...</span></p>
+                            <p class="result-time"><i class="far fa-clock"></i> Время прохождения: <span id="lastTestTime">-</span></p>
+                        </div>
+                        <div class="result-score">
+                            <div class="score-circle">
+                                <span class="score-number" id="lastTestScore">0</span>
+                                <span class="score-percent">%</span>
+                            </div>
+                            <p class="score-label">Общий балл</p>
+                        </div>
+                    </div>
+
+                    <div class="result-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Вопросов:</span>
+                            <span class="stat-value" id="lastTestTotalQuestions">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Правильных:</span>
+                            <span class="stat-value" id="lastTestCorrectAnswers">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Процент:</span>
+                            <span class="stat-value" id="lastTestPercentage">0%</span>
+                        </div>
+                    </div>
+
+                    <div class="result-components" id="resultComponents">
+                        <!-- Компоненты будут заполнены через JS -->
+                    </div>
+
+                    <div class="result-footer">
+                        <div class="result-level">
+                            <span class="level-badge" id="lastTestLevel">Новичок</span>
+                            <p class="level-desc" id="lastTestLevelDesc">Уровень загружается...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Сообщение если нет результатов -->
+                <div class="empty-results" id="emptyResults">
+                    <div class="empty-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h4>Нет пройденных тестов</h4>
+                    <p>Пройдите свой первый тест, чтобы увидеть результаты здесь</p>
+                    <a href="/chooseTest" class="btn btn-primary">Пройти первый тест</a>
+                </div>
+            </section>
+
+            <!-- Уровни компетенций -->
+            <section class="levels-section">
+                <h3 class="section-title">Уровни цифровой культуры</h3>
+                <div class="levels-grid">
+                    <div class="level-card">
+                        <div class="level-header beginner">
+                            <h4>Новичок</h4>
+                            <span class="level-range">0-40%</span>
+                        </div>
+                        <div class="level-content">
+                            <p>Базовые знания, требуется развитие практических навыков</p>
+                        </div>
+                    </div>
+
+                    <div class="level-card">
+                        <div class="level-header practitioner">
+                            <h4>Практик</h4>
+                            <span class="level-range">41-70%</span>
+                        </div>
+                        <div class="level-content">
+                            <p>Хорошие базовые навыки, требуется углубление знаний</p>
+                        </div>
+                    </div>
+
+                    <div class="level-card">
+                        <div class="level-header specialist">
+                            <h4>Специалист</h4>
+                            <span class="level-range">71-90%</span>
+                        </div>
+                        <div class="level-content">
+                            <p>Прочные знания и практические навыки, можно совершенствоваться</p>
+                        </div>
+                    </div>
+
+                    <div class="level-card">
+                        <div class="level-header expert">
+                            <h4>Эксперт</h4>
+                            <span class="level-range">91-100%</span>
+                        </div>
+                        <div class="level-content">
+                            <p>Высокий уровень мастерства, может обучать других</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Подвал кабинета -->
+        <footer class="dashboard-footer">
+            <p>© 2026 DigitalCulture.test | Личный кабинет</p>
+            <p><a href="/">Вернуться на главную</a></p>
+        </footer>
+    </main>
+</div>
+
+<!-- JavaScript -->
+<script src="js/dashboard.js"></script>
+</body>
+</html>

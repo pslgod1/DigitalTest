@@ -1,0 +1,462 @@
+
+
+/* Общие стили для страниц авторизации */
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8f0fe 100%);
+}
+
+.auth-header .navbar {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Контейнер для форм */
+.auth-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Карточка с формой */
+.auth-card {
+    background: white;
+    border-radius: 24px;
+    padding: 48px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    animation: slideInUp 0.6s ease;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Заголовок формы */
+.auth-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.auth-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.auth-subtitle {
+    color: var(--text-gray);
+    font-size: 1rem;
+}
+
+/* Форма */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Группы полей */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+.form-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.required {
+    color: var(--error);
+    font-weight: 600;
+}
+
+.form-link {
+    font-size: 0.85rem;
+    color: var(--primary-blue);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.form-link:hover {
+    color: var(--primary-blue-dark);
+    text-decoration: underline;
+}
+
+/* Обертка для инпута с иконкой */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.form-input {
+    width: 100%;
+    padding: 16px 48px 16px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: white;
+    color: var(--text-dark);
+    transition: all var(--transition-fast);
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+}
+
+.form-input::placeholder {
+    color: var(--text-light);
+}
+
+/* Иконки внутри инпутов */
+.input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    pointer-events: none;
+}
+
+/* Кнопка показа/скрытия пароля */
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: color var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle:hover {
+    color: var(--text-gray);
+    background: var(--bg-light);
+}
+
+/* Подсказки под полями */
+.form-hint {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: 4px;
+}
+
+/* Индикатор сложности пароля */
+.password-strength {
+    display: flex;
+    gap: 4px;
+    margin-top: 8px;
+    height: 4px;
+}
+
+.strength-bar {
+    flex: 1;
+    background: var(--border-color);
+    border-radius: 2px;
+    transition: background-color var(--transition-fast);
+}
+
+/* Чекбокс */
+.form-checkbox {
+    margin: 8px 0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    line-height: 1.4;
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-custom {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    background: white;
+    transition: all var(--transition-fast);
+    position: relative;
+    margin-top: 2px;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-custom {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-custom::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-link {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+
+.checkbox-link:hover {
+    text-decoration: underline;
+}
+
+/* Кнопка авторизации */
+.btn-auth {
+    width: 100%;
+    padding: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+/* Ошибки формы */
+.form-error {
+    background: rgba(234, 67, 53, 0.1);
+    color: var(--error);
+    padding: 12px 16px;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+    border: 1px solid rgba(234, 67, 53, 0.2);
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Разделитель */
+.auth-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.auth-divider span {
+    padding: 0 16px;
+}
+
+/* Футер формы */
+.auth-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.auth-footer p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+}
+
+/* Блок с дополнительной информацией */
+.auth-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 400px;
+}
+
+.info-card {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    transition: transform var(--transition-normal);
+}
+
+.info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.info-icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+}
+
+.info-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+
+.info-card p {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .auth-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .auth-info {
+        max-width: 480px;
+        width: 100%;
+    }
+    
+    .info-card {
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .auth-card {
+        padding: 32px 24px;
+    }
+    
+    .auth-title {
+        font-size: 1.75rem;
+    }
+    
+    .auth-info {
+        gap: 16px;
+    }
+    
+    .info-card {
+        padding: 20px;
+    }
+}
+
+/* Футер для страниц авторизации */
+.auth-footer.footer {
+    background: transparent;
+    padding: 20px;
+    margin-top: auto;
+}
+
+.auth-footer .footer-bottom {
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+    text-align: center;
+}
+
+/* Успешное состояние полей */
+.form-input.valid {
+    border-color: var(--success);
+}
+
+.form-input.invalid {
+    border-color: var(--error);
+}
+
+/* Анимация загрузки */
+.btn-auth.loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn-auth.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.form-success {
+    background: rgba(52, 168, 83, 0.1);
+    color: var(--success);
+    padding: 12px 16px;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+    border: 1px solid rgba(52, 168, 83, 0.2);
+    margin: 16px 0;
+    text-align: center;
+}
+
+/* Адаптивность для кода подтверждения */
+@media (max-width: 576px) {
+    .code-input {
+        width: 45px;
+        height: 55px;
+        font-size: 1.6rem;
+    }
+    
+    .code-container {
+        gap: 8px;
+    }
+    
+    .verification-title {
+        font-size: 1.5rem;
+    }
+}

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оценка цифровой грамотности</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/mainForm.css">
+    
+    
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar-container">
+                <a href="/" class="logo">
+                    <div class="logo-icon">DC</div>
+                    <span class="logo-text">DigitalCulture<span class="logo-highlight">.test</span></span>
+                </a>
+                
+                <div class="nav-links">
+                    <a href="#about" class="nav-link">О проекте</a>
+
+                    <a href="#how-it-works" class="nav-link">Как это работает</a>
+                </div>
+                
+                <div class="nav-auth">
+                    <a href="/login" class="btn btn-outline">Войти</a>
+                    <a href="/register" class="btn btn-primary">Начать тест</a>
+                </div>
+                
+                <!-- Мобильное меню -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Главный герой-блок -->
+    <main class="main-content">
+        <section class="hero">
+            <div class="hero-container">
+                <h1 class="hero-title">Оцени свой уровень<br><span class="hero-highlight">цифровой культуры</span></h1>
+                
+                <p class="hero-subtitle">
+                    Пройдите тест и узнайте, насколько вы готовы
+                    к цифровой трансформации.
+                </p>
+                
+                <div class="hero-actions">
+                    <a href="/register" class="btn btn-primary btn-large">
+                        <span>Начать тестирование</span>
+                        <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                    </a>
+                    
+                    <a href="#how-it-works" class="btn btn-ghost btn-large">
+                        <span>Узнать больше</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- О проекте -->
+        <section class="section" id="about">
+            <div class="section-container">
+                <h2 class="section-title">Что такое цифровая культура?</h2>
+                
+                <div class="components-grid">
+                    <div class="component-card">
+                        <div class="component-icon" style="background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);">1</div>
+                        <h3 class="component-title">Цифровое мышление</h3>
+                        <p class="component-desc">Способность критически оценивать информацию, решать проблемы с помощью цифровых инструментов.</p>
+                    </div>
+                    
+                    <div class="component-card">
+                        <div class="component-icon" style="background: linear-gradient(135deg, #ea4335 0%, #fbbc04 100%);">2</div>
+                        <h3 class="component-title">Цифровая аффилиация</h3>
+                        <p class="component-desc">Мотивация и готовность использовать цифровые технологии в профессиональной деятельности.</p>
+                    </div>
+                    
+                    <div class="component-card">
+                        <div class="component-icon" style="background: linear-gradient(135deg, #34a853 0%, #0d9d58 100%);">3</div>
+                        <h3 class="component-title">Цифровая гибкость</h3>
+                        <p class="component-desc">Адаптивность к новым технологиям, способность быстро осваивать цифровые инструменты.</p>
+                    </div>
+                    
+                    <div class="component-card">
+                        <div class="component-icon" style="background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);">4</div>
+                        <h3 class="component-title">Цифровой опыт</h3>
+                        <p class="component-desc">Практические навыки работы с ПО, устройствами и цифровыми сервисами.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Как это работает -->
+        <section class="section section-alt" id="how-it-works">
+            <div class="section-container">
+                <h2 class="section-title">Как проходит тестирование</h2>
+                
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Регистрация</h3>
+                            <p>Создайте аккаунт с помощью email.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Прохождение теста</h3>
+                            <p>Ответьте на вопросы.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Получение результата</h3>
+                            <p>Сразу увидите свой уровень в сфере цифровой культуры.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Работа над собой</h3>
+                            <p>Используйте результаты чтобы выявить свои сильные и слабые стороны.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+
+    </main>
+
+
+    <footer class="footer">
+        <!-- Декоративные элементы -->
+        <div class="footer-decoration footer-decoration-1"></div>
+        <div class="footer-decoration footer-decoration-2"></div>
+
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="/" class="logo footer-logo">
+                    <div class="logo-icon">DC</div>
+                    <span class="logo-text">DigitalCulture<span class="logo-highlight">.test</span></span>
+                </a>
+                <p class="footer-tagline">
+                    Современная платформа для оценки и развития
+                    цифровой культуры
+                </p>
+            </div>
+
+            <div class="footer-links-container">
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Платформа</h4>
+                        <a href="#about">О проекте</a>
+                        <a href="#how-it-works">Как это работает</a>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Аккаунт</h4>
+                        <a href="/login">Войти</a>
+                        <a href="/register">Регистрация</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 DigitalCulture.test — Оценка цифровой культуры</p>
+
+        </div>
+    </footer>
+
+    <script src="js/errorHandler.js"></script>
+    <script src="js/mainForm.js"></script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты теста | DigitalCulture.test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/resultForm.css">
+    <link rel="stylesheet" href="css/mainForm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="result-container">
+    <header class="result-header">
+        <div class="header-content">
+            <a href="/dashboard" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Панель управления
+            </a>
+            <div class="header-info">
+                <h1>
+                    <i class="fas fa-chart-line"></i>
+                    Результаты теста
+                </h1>
+
+            </div>
+
+        </div>
+    </header>
+
+    <main class="result-main">
+        <!-- Верхняя часть - основная статистика -->
+        <section class="result-top-section">
+            <div class="score-card">
+                <div class="score-header">
+                    <h2>
+                        <i class="fas fa-trophy"></i>
+                        Итоговый результат
+                    </h2>
+                    <div class="test-info">
+                        <span class="test-title" id="testTitle">Загрузка...</span>
+                        <span class="test-date" id="testDate">Дата прохождения: Загрузка...</span>
+                    </div>
+                </div>
+
+                <div class="score-body">
+                    <div class="score-chart">
+                        <canvas id="scoreChart"></canvas>
+                        <div class="score-percent" id="scorePercent">0%</div>
+                    </div>
+
+                    <div class="score-details">
+                        <div class="score-item">
+                            <span class="score-label">Процент выполнения:</span>
+                            <span class="score-value" id="percentageValue">0%</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">Правильных ответов:</span>
+                            <span class="score-value" id="correctAnswers">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">Всего вопросов:</span>
+                            <span class="score-value" id="totalQuestions">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">Время прохождения:</span>
+                            <span class="score-value" id="timeSpent">00:00</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">Статус:</span>
+                            <span class="score-value status-completed">Завершен</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-footer">
+                    <div class="level-indicator">
+                        <span class="level-label">Уровень:</span>
+                        <div class="level-badge" id="levelBadge">Начальный</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="categories-card">
+                <h3>
+                    <i class="fas fa-chart-pie"></i>
+                    Результаты по категориям
+                </h3>
+
+                <div class="categories-chart">
+                    <canvas id="categoriesChart"></canvas>
+                </div>
+
+                <div class="categories-list" id="categoriesList">
+                    <div class="loading-categories">
+                        <div class="spinner-small"></div>
+                        <span>Загрузка категорий...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Средняя часть - анализ и вопросы -->
+        <section class="result-middle-section">
+            <div class="progress-card">
+                <h3>
+                    <i class="fas fa-chart-bar"></i>
+                    Анализ результатов
+                </h3>
+
+                <div class="progress-description">
+                    <p>На основе ваших результатов мы определили сильные стороны</p>
+                </div>
+
+                <div class="strengths-list">
+                    <h4>
+                        <i class="fas fa-check-circle"></i>
+                        Сильные стороны
+                    </h4>
+                    <ul id="strengthsList">
+                    </ul>
+                </div>
+            </div>
+
+            <div class="questions-nav-card">
+                <h3>
+                    <i class="fas fa-list-ol"></i>
+                    Ответы на вопросы
+                </h3>
+
+                <div class="filter-options">
+                    <button class="filter-btn active" data-filter="all">Все</button>
+                    <button class="filter-btn" data-filter="correct">
+                        <i class="fas fa-check-circle"></i>
+                        Правильные
+                    </button>
+                    <button class="filter-btn" data-filter="incorrect">
+                        <i class="fas fa-times-circle"></i>
+                        Неправильные
+                    </button>
+                    <button class="filter-btn" data-filter="skipped">
+                        <i class="fas fa-question-circle"></i>
+                        Пропущенные
+                    </button>
+                </div>
+
+                <div class="questions-scroll">
+                    <div class="questions-list" id="questionsList">
+                        <div class="loading-questions">
+                            <div class="spinner-small"></div>
+                            <span>Загрузка вопросов...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Нижняя часть - детали вопроса -->
+        <section class="result-bottom-section">
+            <div class="question-detail-card" id="questionDetailCard">
+                <div class="question-detail-header">
+                    <h4 id="detailQuestionNumber">Вопрос #1</h4>
+                    <span class="question-status" id="detailQuestionStatus"></span>
+                </div>
+
+                <div class="question-detail-body">
+                    <div class="question-text" id="detailQuestionText">
+                        Загрузка вопроса...
+                    </div>
+
+                    <div class="question-category">
+                        <i class="fas fa-tag"></i>
+                        <span id="detailQuestionCategory">Категория</span>
+                    </div>
+
+                    <div class="answers-review">
+                        <h5>Ваши ответы:</h5>
+                        <div class="answers-list" id="detailAnswersList">
+                        </div>
+                    </div>
+
+                    <div class="explanation" id="detailExplanation">
+                        <h5>
+                            <i class="fas fa-info-circle"></i>
+                            Объяснение
+                        </h5>
+                        <p id="explanationText">Объяснение будет показано здесь</p>
+                    </div>
+                </div>
+
+                <div class="question-detail-footer">
+                    <button class="btn btn-outline btn-sm" id="prevQuestionBtn">
+                        <i class="fas fa-arrow-left"></i>
+                        Предыдущий
+                    </button>
+                    <button class="btn btn-outline btn-sm" id="nextQuestionBtn">
+                        Следующий
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="result-footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <h5>DigitalCulture.test</h5>
+                <p>Система оценки цифровых компетенций</p>
+            </div>
+
+            <div class="footer-actions">
+                <a href="/dashboard" class="footer-link">
+                    <i class="fas fa-home"></i>
+                    Панель управления
+                </a>
+                <a href="/chooseTest" class="footer-link">
+                    <i class="fas fa-clipboard-list"></i>
+                    Выбор тестов
+                </a>
+            </div>
+
+            <div class="footer-copyright">
+                <p>© 2026 DigitalCulture.test | Все права защищены</p>
+                <p class="footer-small">Результаты теста предназначены для личного использования</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<div class="modal" id="certificateModal" style="display: none;">
+    <div class="modal-content modal-lg">
+        <div class="modal-header">
+            <h3>
+                <i class="fas fa-award"></i>
+                Сертификат о прохождении
+            </h3>
+            <button class="modal-close" id="certificateModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="full-certificate" id="fullCertificate">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-outline" id="printCertificateBtn">
+                <i class="fas fa-print"></i>
+                Печать сертификата
+            </button>
+            <button class="btn btn-primary" id="saveCertificateBtn">
+                <i class="fas fa-save"></i>
+                Сохранить как PDF
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="js/resultForm.js"></script>
+</body>
+</html>

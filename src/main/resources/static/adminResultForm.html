@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты теста | DigitalCulture.test</title>
+    <link rel="stylesheet" href="css/adminResultForm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="admin-results-container">
+    <!-- Шапка -->
+    <header class="admin-results-header">
+        <div class="header-left">
+            <a href="/adminTests" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Все тесты
+            </a>
+            <h1 id="testTitle">Результаты теста</h1>
+            <div class="test-info" id="testInfo">
+                <!-- Информация о тесте будет заполняться динамически -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="admin-results-main">
+        <!-- Сообщения -->
+        <div id="messages">
+            <div id="successMessage" class="message success" style="display: none;"></div>
+            <div id="errorMessage" class="message error" style="display: none;"></div>
+        </div>
+
+        <!-- Загрузка -->
+        <div id="loading" class="loading-container">
+            <div class="spinner"></div>
+            <p>Загрузка результатов...</p>
+        </div>
+
+        <!-- Фильтры и статистика -->
+        <div class="results-header" id="resultsHeader" style="display: none;">
+            <div class="stats-overview">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <span class="stat-value" id="totalUsers">0</span>
+                    <span class="stat-label">Всего пользователей</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <span class="stat-value" id="avgScore">0%</span>
+                    <span class="stat-label">Средний результат</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <span class="stat-value" id="completionRate">0%</span>
+                    <span class="stat-label">Завершили тест</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Список пользователей -->
+        <div id="usersContainer" class="users-container" style="display: none;">
+            <div class="users-header">
+                <h2><i class="fas fa-user-friends"></i> Пользователи, прошедшие тест</h2>
+                <div class="users-count">
+                    <span id="usersCount">0</span> пользователей
+                </div>
+            </div>
+
+            <div class="users-table-container">
+                <table class="users-table" id="usersTable">
+                    <thead>
+                    <tr>
+                        <th>Имя пользователя</th>
+                        <th>Email</th>
+                        <th>Результат</th>
+                        <th>Время прохождения</th>
+                        <th>Дата завершения</th>
+                        <th>Действия</th>
+                    </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                    <!-- Данные пользователей будут добавляться динамически -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Сообщение если нет пользователей -->
+            <div id="noUsersMessage" class="no-users-message" style="display: none;">
+                <div class="empty-icon">
+                    <i class="fas fa-user-slash"></i>
+                </div>
+                <h3>Нет результатов тестирования</h3>
+                <p>Пока никто не прошел этот тест</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальное окно результатов пользователя -->
+    <div id="userResultsModal" class="modal" style="display: none;">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-chart-bar"></i>
+                    Результаты пользователя
+                </h3>
+                <button class="modal-close" id="closeUserResultsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="user-info-header" id="userInfoHeader">
+                    <!-- Информация о пользователе будет заполняться динамически -->
+                </div>
+
+                <!-- Общая статистика -->
+                <div class="overall-results" id="overallResults">
+                    <!-- Общие результаты будут заполняться динамически -->
+                </div>
+
+                <!-- Детали по вопросам -->
+                <div class="detailed-results" id="detailedResults">
+                    <h4>
+                        <i class="fas fa-list"></i>
+                        Подробные результаты по вопросам
+                    </h4>
+                    <div class="questions-list" id="questionsList">
+                        <!-- Детали вопросов будут добавляться динамически -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="closeModalBtn">
+                    Закрыть
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/adminResultForm.js"></script>
+</body>
+</html>

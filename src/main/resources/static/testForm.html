@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прохождение теста | DigitalCulture.test</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/testForm.css">
+
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="test-container">
+    <!-- Шапка теста -->
+    <header class="test-header">
+        <div class="header-left">
+            <a href="/dashboard" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Панель управления
+            </a>
+            <div class="test-title">
+                <h1 id="testTitle">Загрузка теста...</h1>
+                <p class="test-subtitle" id="testDescription"></p>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <!-- Таймер -->
+            <div class="timer-container">
+                <div class="timer" id="timer">
+                    <i class="fas fa-clock"></i>
+                    <span id="timeDisplay">00:00</span>
+                </div>
+                <div class="timer-label">Осталось времени</div>
+            </div>
+
+            <!-- Информация о пользователе -->
+            <div class="user-info">
+                <div class="user-avatar">
+                    <img src="https://ui-avatars.com/api/?name=П&background=3498db&color=fff" alt="Аватар">
+                </div>
+                <div class="user-details">
+                    <span class="user-name">Пользователь</span>
+                    <span class="test-status" id="testStatus">Тест начат</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main class="test-main">
+        <!-- Боковая панель навигации по вопросам -->
+        <aside class="test-sidebar">
+            <div class="sidebar-section">
+                <h3>
+                    <i class="fas fa-list-ol"></i>
+                    Вопросы теста
+                </h3>
+                <div class="questions-nav" id="questionsNav">
+                    <!-- Навигация по вопросам будет заполняться динамически -->
+                    <div class="loading-nav">
+                        <div class="spinner-small"></div>
+                        <span>Загрузка вопросов...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>
+                    <i class="fas fa-chart-pie"></i>
+                    Прогресс
+                </h3>
+                <div class="progress-stats">
+                    <div class="progress-item">
+                        <span class="progress-label">Отвечено:</span>
+                        <span class="progress-value" id="answeredCount">0</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-label">Осталось:</span>
+                        <span class="progress-value" id="remainingCount">0</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-label">Всего:</span>
+                        <span class="progress-value" id="totalCount">0</span>
+                    </div>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-percent" id="progressPercent">0%</div>
+                </div>
+            </div>
+
+            <!-- Убрал секцию с автором -->
+            <div class="sidebar-section" style="display: none;">
+                <h3>
+                    <i class="fas fa-info-circle"></i>
+                    Информация
+                </h3>
+                <div class="test-info">
+                    <div class="info-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Вопросов: <strong id="infoTotalQuestions">0</strong></span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Время: <strong id="infoTimeLimit">0 мин</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кнопки управления тестом -->
+            <div class="sidebar-actions">
+                <button class="btn btn-outline btn-block" id="pauseTestBtn">
+                    <i class="fas fa-pause"></i>
+                    Пауза
+                </button>
+                <button class="btn btn-secondary btn-block" id="finishTestBtn">
+                    <i class="fas fa-flag-checkered"></i>
+                    Завершить тест
+                </button>
+            </div>
+        </aside>
+
+        <!-- Основная область с вопросом -->
+        <section class="test-content">
+            <!-- Загрузочный экран -->
+            <div class="loading-screen" id="loadingScreen">
+                <div class="spinner-large"></div>
+                <h2>Загрузка теста...</h2>
+                <p>Пожалуйста, подождите</p>
+            </div>
+
+            <!-- Контейнер для вопроса -->
+            <div class="question-container" id="questionContainer" style="display: none;">
+                <!-- Заголовок вопроса -->
+                <div class="question-header">
+                    <div class="question-number">
+                        <span class="number-label">Вопрос</span>
+                        <span class="number-value" id="currentQuestionNumber">1</span>
+                        <span class="number-total" id="totalQuestionNumber">/ 10</span>
+                    </div>
+                    <div class="question-category">
+                        <i class="fas fa-tag"></i>
+                        <span id="questionCategory">Цифровое мышление</span>
+                    </div>
+                </div>
+
+                <!-- Текст вопроса -->
+                <div class="question-text-container">
+                    <div class="question-text" id="questionText">
+                        Загрузка вопроса...
+                    </div>
+                    <div class="question-type">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Выберите один правильный ответ</span>
+                    </div>
+                </div>
+
+                <!-- Варианты ответов -->
+                <div class="answers-container" id="answersContainer">
+                    <!-- Варианты ответов будут заполняться динамически -->
+                    <div class="loading-answers">
+                        <div class="spinner-small"></div>
+                        <span>Загрузка вариантов ответов...</span>
+                    </div>
+                </div>
+
+                <!-- Кнопки навигации по вопросам -->
+                <div class="question-navigation">
+                    <button class="btn btn-outline" id="prevQuestionBtn" disabled>
+                        <i class="fas fa-arrow-left"></i>
+                        Предыдущий вопрос
+                    </button>
+
+                    <!-- Убрал кнопку пометки и её подпись -->
+                    <div class="question-mark" style="display: none;">
+                        <button class="btn-icon" id="markQuestionBtn" title="Пометить вопрос">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                        <span>Пометить</span>
+                    </div>
+
+                    <button class="btn btn-primary" id="nextQuestionBtn">
+                        Следующий вопрос
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Сообщение о завершении -->
+            <div class="completion-screen" id="completionScreen" style="display: none;">
+                <div class="completion-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Тест завершен!</h2>
+                <p>Вы ответили на все вопросы теста</p>
+                <div class="completion-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-check"></i>
+                        <span class="stat-value" id="correctAnswers">0</span>
+                        <span class="stat-label">Правильных ответов</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-clock"></i>
+                        <span class="stat-value" id="timeSpent">00:00</span>
+                        <span class="stat-label">Затраченное время</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="stat-value" id="testScore">0%</span>
+                        <span class="stat-label">Результат</span>
+                    </div>
+                </div>
+                <div class="completion-actions">
+                    <button class="btn btn-outline" id="reviewTestBtn">
+                        <i class="fas fa-search"></i>
+                        Просмотр ответов
+                    </button>
+                    <button class="btn btn-primary" id="finishTestFinalBtn">
+                        <i class="fas fa-flag-checkered"></i>
+                        Завершить тест
+                    </button>
+                    <a href="/dashboard" class="btn btn-secondary">
+                        <i class="fas fa-home"></i>
+                        На главную
+                    </a>
+                </div>
+            </div>
+
+            <!-- Экран паузы -->
+            <div class="pause-screen" id="pauseScreen" style="display: none;">
+                <div class="pause-icon">
+                    <i class="fas fa-pause-circle"></i>
+                </div>
+                <h2>Тест на паузе</h2>
+                <p>Вы можете продолжить тест в любое время</p>
+                <div class="pause-info">
+                    <div class="info-card">
+                        <i class="fas fa-clock"></i>
+                        <div class="info-content">
+                            <span class="info-label">Прошло времени:</span>
+                            <span class="info-value" id="pauseTimeElapsed">00:00</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-question-circle"></i>
+                        <div class="info-content">
+                            <span class="info-label">Отвечено вопросов:</span>
+                            <span class="info-value" id="pauseAnswered">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pause-actions">
+                    <button class="btn btn-primary" id="resumeTestBtn">
+                        <i class="fas fa-play"></i>
+                        Продолжить тест
+                    </button>
+                    <button class="btn btn-outline" id="exitTestBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Выйти из теста
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="test-footer">
+        <div class="footer-content">
+            <!-- Убрал легенду с пометками -->
+            <div class="test-legend" style="display: none;">
+                <div class="legend-item">
+                    <span class="legend-color answered"></span>
+                    <span class="legend-text">Отвечено</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color current"></span>
+                    <span class="legend-text">Текущий</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color marked"></span>
+                    <span class="legend-text">Помечен</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color unanswered"></span>
+                    <span class="legend-text">Не отвечено</span>
+                </div>
+            </div>
+
+            <div class="test-controls">
+                <button class="btn btn-outline btn-sm" id="testInstructionsBtn">
+                    <i class="fas fa-question-circle"></i>
+                    Инструкция
+                </button>
+                <button class="btn btn-outline btn-sm" id="testFullscreenBtn">
+                    <i class="fas fa-expand"></i>
+                    Полный экран
+                </button>
+            </div>
+
+            <div class="copyright">
+                <p>© 2026 DigitalCulture.test | Система тестирования</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- Модальное окно инструкции -->
+<div class="modal" id="instructionsModal" style="display: none;">
+    <div class="modal-content modal-lg">
+        <div class="modal-header">
+            <h3>
+                <i class="fas fa-book"></i>
+                Инструкция по прохождению теста
+            </h3>
+            <button class="modal-close" id="instructionsClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="instructions-content">
+                <div class="instruction-section">
+                    <h4>
+                        <i class="fas fa-info-circle"></i>
+                        Основные правила
+                    </h4>
+                    <ul>
+                        <li>Тест состоит из нескольких вопросов с одним правильным ответом</li>
+                        <li>На прохождение теста отводится ограниченное время</li>
+                        <li>Вы можете перемещаться между вопросами в любое время</li>
+                        <li>Ответы сохраняются автоматически</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-section">
+                    <h4>
+                        <i class="fas fa-mouse-pointer"></i>
+                        Управление
+                    </h4>
+                    <ul>
+                        <li>Для выбора ответа нажмите на вариант ответа</li>
+                        <li>Используйте кнопки "Предыдущий"/"Следующий" для навигации</li>
+                        <li>На боковой панели отображаются все вопросы теста</li>
+                        <li>Нажмите на номер вопроса для быстрого перехода</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-section">
+                    <h4>
+                        <i class="fas fa-clock"></i>
+                        Таймер
+                    </h4>
+                    <ul>
+                        <li>Таймер отображает оставшееся время в правом верхнем углу</li>
+                        <li>При истечении времени тест завершается автоматически</li>
+                        <li>Вы можете поставить тест на паузу (время паузы не учитывается)</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-section">
+                    <h4>
+                        <i class="fas fa-flag-checkered"></i>
+                        Завершение теста
+                    </h4>
+                    <ul>
+                        <li>Для завершения теста нажмите кнопку "Завершить тест"</li>
+                        <li>Вы можете досрочно завершить тест в любое время</li>
+                        <li>После завершения вы увидите результаты</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" id="understandBtn">
+                <i class="fas fa-check"></i>
+                Понятно
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно подтверждения завершения -->
+<div class="modal" id="confirmFinishModal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>
+                <i class="fas fa-exclamation-triangle"></i>
+                Завершение теста
+            </h3>
+            <button class="modal-close" id="confirmFinishClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="warning-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <h4>Вы уверены, что хотите завершить тест?</h4>
+            <p>После завершения вы не сможете изменить ответы</p>
+
+            <div class="finish-stats">
+                <div class="stat-item">
+                    <span>Отвечено вопросов:</span>
+                    <strong id="finishAnswered">0</strong>
+                </div>
+                <div class="stat-item">
+                    <span>Осталось времени:</span>
+                    <strong id="finishTimeLeft">00:00</strong>
+                </div>
+                <!-- Убрал статистику по помеченным вопросам -->
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-outline" id="cancelFinishBtn">
+                Отмена
+            </button>
+            <button class="btn btn-primary" id="confirmFinishBtn">
+                <i class="fas fa-flag-checkered"></i>
+                Завершить тест
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script src="js/testForm.js"></script>
+</body>
+</html>

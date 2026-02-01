@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подтверждение email</title>
+    
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="css/mainForm.css">
+    <link rel="stylesheet" href="css/auth.css">
+    
+    
+    <style>
+        /* Стили для ввода кода */
+        .verification-container {
+            text-align: center;
+        }
+        
+        .verification-title {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+        
+        .verification-subtitle {
+            color: var(--text-gray);
+            margin-bottom: 8px;
+        }
+        
+        .verification-email {
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 32px;
+        }
+        
+        /* Контейнер для кода */
+        .code-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 32px 0;
+        }
+        
+        .code-input {
+            width: 50px;
+            height: 60px;
+            font-size: 1.8rem;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            background: white;
+            color: var(--text-dark);
+            transition: all var(--transition-fast);
+            outline: none;
+        }
+        
+        .code-input:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+            transform: scale(1.05);
+        }
+        
+        .code-input.filled {
+            border-color: var(--success);
+            background-color: rgba(52, 168, 83, 0.05);
+        }
+        
+        .code-input.error {
+            border-color: var(--error);
+            background-color: rgba(234, 67, 53, 0.05);
+            animation: shake 0.5s ease;
+        }
+        
+        /* Таймер */
+        .timer {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin: 16px 0;
+        }
+        
+        .timer.expired {
+            color: var(--error);
+        }
+        
+        /* Кнопка повторной отправки */
+        .resend-btn {
+            background: none;
+            border: none;
+            color: var(--primary-blue);
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 8px;
+            margin-top: 16px;
+        }
+        
+        .resend-btn:disabled {
+            color: var(--text-light);
+            cursor: not-allowed;
+            text-decoration: none;
+        }
+        
+        /* Для формы нового пароля (только для восстановления) */
+        .new-password-form {
+            display: none;
+            margin-top: 32px;
+            text-align: left;
+        }
+        
+        .new-password-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    
+</head>
+<body class="auth-page">
+    <!-- Шапка -->
+    <header class="header auth-header">
+        <nav class="navbar">
+            <div class="navbar-container">
+                <a href="/" class="logo">
+                    <div class="logo-icon">DC</div>
+                    <span class="logo-text">DigitalCulture<span class="logo-highlight">.test</span></span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="auth-container">
+        <div class="auth-card">
+            <div class="verification-container">
+                <!-- Заголовок меняется в зависимости от типа -->
+                <h1 class="verification-title" id="pageTitle">Подтверждение email</h1>
+                <p class="verification-subtitle" id="pageSubtitle">
+                    Введите 6-значный код, отправленный на email
+                </p>
+                <div class="verification-email" id="userEmail">user@example.com</div>
+                
+                <!-- Контейнер для ввода кода -->
+                <div class="code-container">
+                    <input type="text" class="code-input" maxlength="1" data-index="0" inputmode="numeric">
+                    <input type="text" class="code-input" maxlength="1" data-index="1" inputmode="numeric">
+                    <input type="text" class="code-input" maxlength="1" data-index="2" inputmode="numeric">
+                    <input type="text" class="code-input" maxlength="1" data-index="3" inputmode="numeric">
+                    <input type="text" class="code-input" maxlength="1" data-index="4" inputmode="numeric">
+                    <input type="text" class="code-input" maxlength="1" data-index="5" inputmode="numeric">
+                </div>
+                
+                <!-- Сообщения об ошибках/успехе -->
+                <div class="form-error" id="errorMessage" style="display: none;">
+                    Неверный код. Попробуйте ещё раз.
+                </div>
+                
+                <div class="form-success" id="successMessage" style="display: none; background: rgba(52, 168, 83, 0.1); color: var(--success);">
+                    Код подтверждён! Создайте новый пароль.
+                </div>
+                
+                <!-- Таймер -->
+                <div class="timer" id="timer">
+                    Код действителен ещё: <span id="timeLeft">15:00</span>
+                </div>
+                
+                <!-- Кнопка повторной отправки -->
+                <button class="resend-btn" id="resendBtn" disabled>
+                    Отправить код повторно (через 60 сек)
+                </button>
+                
+                <!-- Форма для нового пароля (только для восстановления) -->
+                <form class="new-password-form" id="newPasswordForm">
+                    <div class="form-group">
+                        <label for="newPassword" class="form-label">
+                            <span>Новый пароль</span>
+                            <span class="required">*</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="password" 
+                                id="newPassword" 
+                                name="newPassword"
+                                class="form-input"
+                                placeholder="Введите новый пароль"
+                                required
+                                minlength="8"
+                                style="padding-left: 44px;"
+                            >
+                            <div class="input-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmNewPassword" class="form-label">
+                            <span>Подтвердите пароль</span>
+                            <span class="required">*</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="password" 
+                                id="confirmNewPassword" 
+                                name="confirmNewPassword"
+                                class="form-input"
+                                placeholder="Повторите новый пароль"
+                                required
+                                minlength="8"
+                                style="padding-left: 44px;"
+                            >
+                            <div class="input-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-auth">
+                        <span>Сохранить новый пароль</span>
+                    </button>
+                </form>
+                
+                <!-- Кнопка продолжить (для регистрации) -->
+                <button class="btn btn-primary btn-auth" id="continueBtn" style="display: none; margin-top: 24px;">
+                    <span>Продолжить</span>
+                    <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Дополнительная информация -->
+        <div class="auth-info">
+            <div class="info-card">
+                <div class="info-icon">🔢</div>
+                <h3>6-значный код</h3>
+                <p>Код состоит из 6 цифр. Вводите цифры по порядку</p>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">📱</div>
+                <h3>Автозаполнение</h3>
+                <p>Поля кода заполняются автоматически при вставке</p>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">🔄</div>
+                <h3>Повторная отправка</h3>
+                <p>Если код не пришёл, можно запросить новый через минуту</p>
+            </div>
+        </div>
+    </main>
+
+    
+    <footer class="footer auth-footer">
+        <div class="footer-bottom">
+            <p>© 2026 DigitalCulture.test.</p>
+            <p><a href="/">Вернуться на главную</a></p>
+        </div>
+    </footer>
+
+    
+    <script src="js/emailVerification.js"></script>
+</body>
+</html>

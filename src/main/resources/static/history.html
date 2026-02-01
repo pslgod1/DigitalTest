@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История тестов | DigitalCulture.test</title>
+    <!-- Те же стили что и в dashboard -->
+    <link rel="stylesheet" href="css/mainForm.css">
+    <link rel="stylesheet" href="css/dashBoard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+<div class="dashboard-container">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="user-avatar">
+                <img id="userAvatar"
+                     src="https://ui-avatars.com/api/?background=0077FF&color=fff&size=80"
+                     alt="Аватар" class="avatar-img">
+            </div>
+            <div class="user-info">
+                <h3 class="user-name" id="userName">Загрузка...</h3>
+                <p class="user-email" id="userEmail">Загрузка...</p>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/dashboard" class="nav-link">
+                        <i class="fas fa-home nav-icon"></i>
+                        <span class="nav-text">Главная</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/chooseTest" class="nav-link">
+                        <i class="fas fa-clipboard-list nav-icon"></i>
+                        <span class="nav-text">Выбрать тест</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/history" class="nav-link">
+                        <i class="fas fa-history nav-icon"></i>
+                        <span class="nav-text">История тестов</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-logout" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Выйти</span>
+            </button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">История тестов</h1>
+            </div>
+            <div class="topbar-right">
+                <div class="current-date" id="currentDate"></div>
+            </div>
+        </header>
+
+        <div class="page-content">
+            <div class="history-container" id="historyContainer">
+                <!-- История будет загружена через JS -->
+            </div>
+        </div>
+
+        <footer class="dashboard-footer">
+            <p>© 2026 DigitalCulture.test | История тестов</p>
+            <p><a href="/">Вернуться на главную</a> • <a href="/dashboard">Личный кабинет</a></p>
+        </footer>
+    </main>
+</div>
+
+<script src="js/history.js"></script>
+</body>
+</html>

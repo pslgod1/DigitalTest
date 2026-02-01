@@ -1,0 +1,863 @@
+/* dashboard.css - Стили для личного кабинета */
+
+:root {
+    /* Дополнительные переменные для кабинета */
+    --sidebar-width: 280px;
+    --topbar-height: 70px;
+    --sidebar-bg: #ffffff;
+    --sidebar-text: #5f6368;
+    --sidebar-hover: #f1f3f4;
+    --sidebar-active: #e8f0fe;
+    --card-bg: #ffffff;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --border-light: #f0f0f0;
+}
+
+/* Основная структура */
+.dashboard-page {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ===== БОКОВАЯ ПАНЕЛЬ ===== */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 30px 20px;
+    border-bottom: 1px solid var(--border-light);
+    text-align: center;
+}
+
+.user-avatar {
+    margin-bottom: 16px;
+}
+
+.avatar-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-blue-light);
+    object-fit: cover;
+}
+
+.user-info {
+    text-align: center;
+}
+
+.user-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+}
+
+.user-email {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+/* Навигация в сайдбаре */
+.sidebar-nav {
+    flex: 1;
+    padding: 20px 0;
+}
+
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    margin-bottom: 4px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background-color: var(--sidebar-hover);
+    color: var(--primary-blue);
+}
+
+.nav-item.active .nav-link {
+    background-color: var(--sidebar-active);
+    color: var(--primary-blue);
+    border-right: 3px solid var(--primary-blue);
+}
+
+.nav-icon {
+    width: 24px;
+    text-align: center;
+    margin-right: 12px;
+    font-size: 1.1rem;
+}
+
+.nav-text {
+    font-size: 0.95rem;
+}
+
+/* Кнопка выхода */
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid var(--border-light);
+}
+
+.btn-logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    color: var(--text-gray);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+    background-color: #f1f3f4;
+    color: var(--error);
+    border-color: rgba(234, 67, 53, 0.3);
+}
+
+/* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+.main-content {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Верхняя панель */
+.topbar {
+    height: var(--topbar-height);
+    background-color: white;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-gray);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.menu-toggle:hover {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.notification-bell {
+    position: relative;
+    color: var(--text-gray);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.notification-count {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background-color: var(--error);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.current-date {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    font-family: 'JetBrains Mono', monospace;
+    padding: 6px 12px;
+    background-color: var(--bg-light);
+    border-radius: 20px;
+}
+
+/* Контент страницы */
+.page-content {
+    flex: 1;
+    padding: 30px;
+    background-color: #f8f9fa;
+}
+
+/* Приветственная секция */
+.welcome-section {
+    margin-bottom: 40px;
+}
+
+.welcome-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.user-name-highlight {
+    color: var(--primary-blue);
+}
+
+.welcome-subtitle {
+    color: var(--text-gray);
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* Сетка статистики */
+.stats-section {
+    margin-bottom: 40px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+    line-height: 1;
+}
+
+.stat-number .percent {
+    font-size: 1.5rem;
+    color: var(--text-gray);
+}
+
+.stat-level {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-purple);
+    margin-bottom: 4px;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    margin: 0;
+}
+
+/* Секция быстрых действий */
+.actions-section {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.action-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-light);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.action-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-blue-light);
+}
+
+.action-card.primary-action {
+    border: 2px solid var(--primary-blue);
+    background-color: var(--primary-blue-light);
+}
+
+.action-card.primary-action:hover {
+    background-color: rgba(26, 115, 232, 0.08);
+}
+
+.action-icon {
+    font-size: 2rem;
+    color: var(--primary-blue);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(26, 115, 232, 0.1);
+    border-radius: 12px;
+}
+
+.primary-action .action-icon {
+    background-color: rgba(26, 115, 232, 0.2);
+}
+
+.action-content {
+    flex: 1;
+}
+
+.action-content h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+
+.action-content p {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.action-arrow {
+    color: var(--text-light);
+    font-size: 1.2rem;
+}
+
+/* Секция графика */
+
+
+/* Карточка последнего результата */
+.last-result-section {
+    margin-bottom: 40px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.view-all-link {
+    font-size: 0.95rem;
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.view-all-link:hover {
+    text-decoration: underline;
+}
+
+.result-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    padding: 30px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-light);
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.result-info h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.result-date {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.result-score {
+    text-align: center;
+}
+
+.score-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #4285f4 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.score-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.score-percent {
+    font-size: 1rem;
+}
+
+.score-label {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    margin: 0;
+}
+
+/* Компоненты в результате */
+.result-components {
+    margin-bottom: 30px;
+}
+
+.component-progress {
+    margin-bottom: 20px;
+}
+
+.component-progress:last-child {
+    margin-bottom: 0;
+}
+
+.component-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.component-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.component-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: var(--bg-gray);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 1s ease;
+}
+
+/* Футер результата */
+.result-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-light);
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.result-level {
+    flex: 1;
+}
+
+.level-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.level-badge.beginner {
+    background-color: rgba(251, 188, 4, 0.1);
+    color: #f39c12;
+}
+
+.level-badge.intermediate {
+    background-color: rgba(52, 168, 83, 0.1);
+    color: #27ae60;
+}
+
+.level-badge.advanced {
+    background-color: rgba(26, 115, 232, 0.1);
+    color: var(--primary-blue);
+}
+
+.level-badge.expert {
+    background-color: rgba(142, 68, 173, 0.1);
+    color: var(--accent-purple);
+}
+
+.level-desc {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    margin: 0;
+}
+
+/* Подвал кабинета */
+.dashboard-footer {
+    background-color: white;
+    padding: 20px 30px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+.dashboard-footer p {
+    margin-bottom: 8px;
+}
+
+.dashboard-footer a {
+    color: var(--text-gray);
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.dashboard-footer a:hover {
+    color: var(--primary-blue);
+    text-decoration: underline;
+}
+
+/* Кнопки */
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 1200px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-content {
+        padding: 20px;
+    }
+
+    .stats-grid,
+    .actions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-header,
+    .result-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .topbar {
+        padding: 0 20px;
+    }
+
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .stat-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .action-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .action-icon {
+        align-self: center;
+    }
+
+    .action-arrow {
+        align-self: center;
+    }
+}
+
+.levels-section {
+    margin-bottom: 40px;
+}
+
+.levels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.level-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-light);
+    transition: transform 0.3s ease;
+}
+
+.level-card:hover {
+    transform: translateY(-5px);
+}
+
+.level-header {
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+.level-header h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.level-range {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Цвета для уровней */
+.level-header.beginner {
+    background: linear-gradient(135deg, #ea4335 0%, #fbbc04 100%);
+}
+
+.level-header.practitioner {
+    background: linear-gradient(135deg, #fbbc04 0%, #34a853 100%);
+}
+
+.level-header.specialist {
+    background: linear-gradient(135deg, #34a853 0%, #1a73e8 100%);
+}
+
+.level-header.expert {
+    background: linear-gradient(135deg, #8e44ad 0%, #1a73e8 100%);
+}
+
+.level-content {
+    padding: 20px;
+}
+
+.level-content p {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Стили для бейджей уровней в результатах */
+.level-badge.beginner {
+    background-color: rgba(234, 67, 53, 0.1);
+    color: #ea4335;
+    border: 1px solid rgba(234, 67, 53, 0.2);
+}
+
+.level-badge.practitioner {
+    background-color: rgba(251, 188, 4, 0.1);
+    color: #f39c12;
+    border: 1px solid rgba(251, 188, 4, 0.2);
+}
+
+.level-badge.specialist {
+    background-color: rgba(52, 168, 83, 0.1);
+    color: #27ae60;
+    border: 1px solid rgba(52, 168, 83, 0.2);
+}
+
+.level-badge.expert {
+    background-color: rgba(142, 68, 173, 0.1);
+    color: var(--accent-purple);
+    border: 1px solid rgba(142, 68, 173, 0.2);
+}
+
+/* Информация под графиком */
+.chart-footer {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-light);
+}
+
+.chart-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.chart-info i {
+    color: var(--primary-blue);
+}
+
+/* Убираем кнопку подробнее */
+.result-footer .btn-outline {
+    display: none;
+}
+
+/* Адаптивность для уровней */
+@media (max-width: 992px) {
+    .levels-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .levels-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .level-card {
+        max-width: 100%;
+    }
+}

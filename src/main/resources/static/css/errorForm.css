@@ -1,0 +1,554 @@
+:root {
+    --error-primary: #e74c3c;
+    --error-secondary: #e67e22;
+    --error-dark: #c0392b;
+    --error-light: #fddede;
+    --error-bg: #fdf2f2;
+    --text-dark: #2c3e50;
+    --text-gray: #7f8c8d;
+    --text-light: #95a5a6;
+    --border-color: #e0e0e0;
+    --card-bg: white;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.08);
+    --border-radius: 12px;
+    --border-radius-lg: 20px;
+    --border-radius-sm: 8px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #fdf2f2 0%, #fff5f5 100%);
+    color: var(--text-dark);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.error-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Шапка */
+.error-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 40px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--error-dark);
+}
+
+.logo i {
+    font-size: 2rem;
+}
+
+.logo-dot {
+    color: var(--error-secondary);
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-gray);
+    font-weight: 500;
+    padding: 10px 16px;
+    border-radius: var(--border-radius-sm);
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    background-color: var(--error-light);
+    color: var(--error-dark);
+}
+
+.nav-link i {
+    font-size: 1.1rem;
+}
+
+/* Основное содержимое */
+.error-content {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+@media (max-width: 992px) {
+    .error-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Карточка ошибки */
+.error-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    padding: 40px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--error-light);
+    transition: var(--transition);
+}
+
+.error-card:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+/* Анимация ошибки */
+.error-animation {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+}
+
+.error-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: var(--error-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    animation: bounce 2s infinite;
+}
+
+.error-icon i {
+    font-size: 40px;
+    color: white;
+}
+
+.error-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: var(--error-primary);
+    border-radius: 50%;
+    opacity: 0.2;
+    z-index: 1;
+    animation: pulse 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.2;
+    }
+    70% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.05;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.3);
+        opacity: 0;
+    }
+}
+
+/* Заголовки */
+.error-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--error-dark);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.error-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Детали ошибки */
+.error-details {
+    background: var(--error-bg);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-bottom: 30px;
+    border: 1px solid var(--border-color);
+}
+
+.error-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.error-detail:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: var(--text-dark);
+    min-width: 100px;
+}
+
+.detail-value {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--error-dark);
+    font-weight: 500;
+    text-align: right;
+    word-break: break-all;
+    flex: 1;
+    padding-left: 20px;
+}
+
+/* Отладка */
+.error-debug {
+    background: #2c3e50;
+    border-radius: var(--border-radius);
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.debug-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #34495e;
+    cursor: pointer;
+}
+
+.debug-header h3 {
+    color: white;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.debug-header i {
+    color: #3498db;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.debug-content {
+    padding: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.debug-content pre {
+    margin: 0;
+}
+
+.debug-content code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: #ecf0f1;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Действия */
+.error-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: var(--border-radius-sm);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid transparent;
+    min-width: 160px;
+}
+
+.btn-primary {
+    background: var(--error-primary);
+    color: white;
+    border-color: var(--error-primary);
+}
+
+.btn-primary:hover {
+    background: var(--error-dark);
+    border-color: var(--error-dark);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: var(--error-secondary);
+    color: white;
+    border-color: var(--error-secondary);
+}
+
+.btn-secondary:hover {
+    background: #d35400;
+    border-color: #d35400;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--error-primary);
+    border-color: var(--error-primary);
+}
+
+.btn-outline:hover {
+    background: var(--error-primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Контактная информация */
+.error-contact {
+    text-align: center;
+    padding: 25px;
+    background: var(--error-bg);
+    border-radius: var(--border-radius);
+    border: 1px dashed var(--error-primary);
+}
+
+.error-contact p {
+    margin-bottom: 15px;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--error-primary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: var(--border-radius-sm);
+    transition: var(--transition);
+}
+
+.contact-link:hover {
+    background: var(--error-light);
+    color: var(--error-dark);
+}
+
+/* Информация о системе */
+.system-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.info-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.info-card h3 {
+    color: var(--error-dark);
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-list {
+    list-style: none;
+    padding: 0;
+}
+
+.info-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.info-list li:last-child {
+    border-bottom: none;
+}
+
+.info-list i {
+    color: #27ae60;
+    font-size: 1.1rem;
+}
+
+/* Подвал */
+.error-footer {
+    text-align: center;
+    padding: 30px 0 20px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+.error-footer p {
+    margin-bottom: 15px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--text-gray);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--error-primary);
+    text-decoration: underline;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .error-header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .nav-links {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .error-title {
+        font-size: 2rem;
+    }
+
+    .error-card {
+        padding: 25px;
+    }
+
+    .error-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .error-container {
+        padding: 15px;
+    }
+
+    .error-title {
+        font-size: 1.8rem;
+    }
+
+    .error-subtitle {
+        font-size: 1rem;
+    }
+
+    .error-details {
+        padding: 15px;
+    }
+
+    .error-detail {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .detail-value {
+        text-align: left;
+        padding-left: 0;
+    }
+}

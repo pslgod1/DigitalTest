@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Все тесты | DigitalCulture.test</title>
+    <link rel="stylesheet" href="css/adminTests.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="admin-tests-container">
+    <!-- Шапка -->
+    <header class="admin-tests-header">
+        <div class="header-left">
+            <a href="/admin" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Панель управления
+            </a>
+            <h1>Все тесты</h1>
+        </div>
+        <div class="header-right">
+            <a href="/createTest" class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+                Создать тест
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="admin-tests-main">
+        <!-- Сообщения -->
+        <div id="messages">
+            <div id="successMessage" class="message success" style="display: none;"></div>
+            <div id="errorMessage" class="message error" style="display: none;"></div>
+        </div>
+
+        <!-- Загрузка -->
+        <div id="loading" class="loading-container">
+            <div class="spinner"></div>
+            <p>Загрузка тестов...</p>
+        </div>
+
+        <!-- Список тестов -->
+        <div id="testsContainer" class="tests-container" style="display: none;">
+            <div class="tests-header">
+                <h2><i class="fas fa-list"></i> Список тестов</h2>
+                <div class="tests-count">
+                    <span id="testsCount">0</span> тестов
+                </div>
+            </div>
+
+            <div class="tests-grid" id="testsGrid">
+                <!-- Тесты будут добавляться динамически -->
+            </div>
+
+            <!-- Сообщение если нет тестов -->
+            <div id="noTestsMessage" class="no-tests-message" style="display: none;">
+                <div class="empty-icon">
+                    <i class="fas fa-clipboard-question"></i>
+                </div>
+                <h3>Нет созданных тестов</h3>
+                <p>Создайте первый тест для начала работы</p>
+                <a href="/createTest" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    Создать тест
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальное окно подтверждения удаления -->
+    <div id="deleteModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Удаление теста
+                </h3>
+                <button class="modal-close" id="closeDeleteModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="warning-icon">
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+                <h4>Вы уверены, что хотите удалить тест?</h4>
+                <p>Это действие нельзя отменить. Все данные теста, включая результаты пользователей, будут удалены.</p>
+
+                <div class="test-to-delete">
+                    <strong id="testToDeleteTitle"></strong>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelDelete">
+                    Отмена
+                </button>
+                <button class="btn btn-danger" id="confirmDelete">
+                    <i class="fas fa-trash-alt"></i>
+                    Удалить
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/adminTests.js"></script>
+</body>
+</html>

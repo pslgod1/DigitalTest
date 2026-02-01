@@ -1,0 +1,61 @@
+version: '3.8'
+
+volumes:
+  postgres_data:
+
+services:
+  postgres:
+    image: postgres:17.1-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: DigitalTest
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 11042006Petr
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  app:
+    restart: on-failure
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/DigitalTest
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=11042006Petr
+
+      - SPRING_MAIL_HOST=smtp.gmail.com
+      - SPRING_MAIL_PORT=587
+      - SPRING_MAIL_USERNAME=onlineshopkortex@gmail.com
+      - SPRING_MAIL_PASSWORD=knebwfvpomysjsec
+
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH=true
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE=true
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_REQUIRED=true
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE=false
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_TRUST=smtp.gmail.com
+
+      - SERVER_PORT=8080
+
+      - TZ=Europe/Moscow
+
+      - SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT=30000
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    volumes:
+      - ./uploads:/app/uploads
+
+  nginx:
+    image: nginx:1.24-alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./uploads:/usr/share/nginx/html/uploads
